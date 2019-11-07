@@ -8,12 +8,15 @@ A fairly straight-forward project, the key concept is to understand the impact o
 A (P)roportional-(I)ntegral-(D)erivative Controller is a feedback control loop. The goal is to fine tune the control values to achieve the target control value as fast as possible but also as smooth and stable as possible.
 
 Given a target value and a measure position, we can compute the current system error. This will be the input for the PID control loop.
+
 ![Img/PID](./Img/PIDEquation.png)
-- The proportinal value is the brute force stepping part of the control. With each step it moves to the target value by an amount proportional to the error. In this project, steer the car to the desired lane position by reducing the measured error to 0. Since each step is a fixed factor of a value, the proportional component of the control will never exactly reach the target and always overshoot it, ending in an oscillating behaviour around the 0 error center. In turn, the further away from the target, the larger the measured error and the larger the applied correction.
-- The differential value smoothens the proportional approach. By taking the difference of the last measured error with the current one, it corrects the step and reduces the overshoot.
-- The integral part will counter the error propagation, reducing systematic biases.
+
+- The proportinal value Kp is the brute force stepping part of the control. With each step it moves to the target value by an amount proportional to the error. In this project, steer the car to the desired lane position by reducing the measured error to 0. Since each step is a fixed factor of a value, the proportional component of the control will never exactly reach the target and always overshoot it, ending in an oscillating behaviour around the 0 error center. In turn, the further away from the target, the larger the measured error and the larger the applied correction.
+- The differential value Kd smoothens the proportional approach. By taking the difference of the last measured error with the current one, it corrects the step and reduces the overshoot.
+- The integral part Ki will counter the error propagation, reducing systematic biases.
 
 ![Img/Twiddle](./Img/twiddle.png)
+> Effects of the different components and the optional Twiddle parameter adjustment algorithm. 
 
 ## Parameter tuning
 Parameters were iterativelly fine tuned, starting from a P: 1, I: 0, D: 0 configuration and evaluating the car's behaviour. 
